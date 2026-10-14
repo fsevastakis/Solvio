@@ -1,6 +1,7 @@
 import Answers from "../../models/Answers.js";
 import { problemsQueue, solverStatus } from "../solversproxy/consumeProblem.js";
 
+// problems waiting for the solver, plus the one being solved (if any)
 const getQueueLength = async () => {
   return solverStatus ? problemsQueue.length : problemsQueue.length + 1;
 };
@@ -58,6 +59,8 @@ const findAvgExecTime = async () => {
   }
 };
 
+// Problems solved per hour of each day, as a table for the "Daily submissions" chart:
+// a header row, then one row per day: [MM-DD, count for 00:00-01:00, ..., count for 23:00-00:00, daily total / 24]
 const query1 = async () => {
   try {
     const datagroupby = await Answers.aggregate([
@@ -166,6 +169,7 @@ const query1 = async () => {
   }
 };
 
+// Execution time of every solved problem, for the execution time histogram
 const query2 = async () => {
   try {
     const results = await Answers.find();

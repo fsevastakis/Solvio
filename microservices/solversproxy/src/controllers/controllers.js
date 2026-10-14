@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import { storeResult } from "../models/storeResult.js";
 import { pushResults } from "../pushResults.js";
 
+// Send a problem to the solver microservice and wait for its answer.
+// The solver's raw output is parsed (processResult) and published to the
+// answers' exchange as { id, userID, answer, execTime, updatedAt, problemID },
+// where id and problemID are both the problem's id.
 export async function Solver(data) {
   const dataForSolver = {
     python_script: data.pythonScript.script,
@@ -40,6 +44,14 @@ export async function Solver(data) {
     });
 }
 
+// Turn the solver's stdout into { Objective, Routes, Maximum_distance }.
+// Expected output of the VRP script:
+//   Objective: <value>
+//   Route for vehicle <n>:
+//    <node> ->  <node> -> ... <node>
+//   Distance of the route: <distance>m
+//   (one Route block per vehicle)
+//   Maximum of the route distances: <distance>m
 function processResult(inputText) {
   const lines = inputText.split("\n");
   let objective,

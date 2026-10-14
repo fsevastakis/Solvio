@@ -1,6 +1,7 @@
 import Results from "../models/Results.js";
 import axios from "axios";
 
+// number of messages in ProxyQueue, read from the RabbitMQ management HTTP API
 const getQueueLength = async () => {
     const url = 'http://rabbitmqquestions:15672/api/queues/%2F/ProxyQueue';
     const auth = {
@@ -71,6 +72,8 @@ const findAvgExecTime = async () => {
   }
 };
 
+// Problems solved per hour of each day, as a table for the "Daily submissions" chart:
+// a header row, then one row per day: [MM-DD, count for 00:00-01:00, ..., count for 23:00-00:00, daily total / 24]
 const query1 = async () => {
   try {
     const datagroupby = await Results.aggregate([
@@ -179,6 +182,7 @@ const query1 = async () => {
   }
 };
 
+// Execution time of every solved problem, for the execution time histogram
 const query2 = async () => {
   try {
     const results = await Results.find();

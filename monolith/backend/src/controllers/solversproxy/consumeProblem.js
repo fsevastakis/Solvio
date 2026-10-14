@@ -4,9 +4,13 @@ import { storeAnswer } from "../../models/storeAnswer.js";
 import { sendEmailForAnswer } from "../emailservice/sendEmailForAnswer.js";
 import { creditsOfAnswer } from "../usersmanagement/creditsOfAnswer.js";
 
+// In-memory replacement of the RabbitMQ ProxyQueue of the microservices version:
+// ids of problems waiting for the solver (its length is shown in the statistics)
 export const problemsQueue = [];
+// true while the solver is free to take a new problem
 export let solverStatus = true;
 
+// Queue a problem whose Run button was pressed and start the solver if it is free
 export function consumeProblem(problemID) {
     problemsQueue.push(problemID);
     console.log("Problem queued: ", problemID);
@@ -14,6 +18,11 @@ export function consumeProblem(problemID) {
     if (solverStatus) Solver();
 }
 
+// Take the next problem from the queue, send it to the solver container and wait for the answer.
+// Then do in order what the answers' consumers did in the microservices version:
+// store the answer (showresults, viewstatistics), mark the problem finished (showsubmissions),
+// email the user (emailservice) and charge the credits (usersmanagement).
+// Finally call itself again for the next queued problem, so problems are solved one at a time.
 const Solver = async (req, res) => {
     if (problemsQueue.length === 0) return;
 

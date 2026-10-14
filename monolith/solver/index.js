@@ -17,6 +17,13 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Solve one problem.
+// Request: { python_script, input_data, num_vehicles, depot, max_distance }
+// The script (provided by the course, uploaded with each problem) and the input data
+// are written to python_code.py and input_data, then run as
+//   python3 python_code.py ./input_data <num_vehicles> <depot> <max_distance>
+// Response: { result: <the script's stdout>, execTime: <seconds> }
+// Both files are overwritten by the next problem - no results are kept here.
 app.post("/Solver", (req, res) => {
   const data = req.body;
   const python_code = data.python_script;
