@@ -29,7 +29,9 @@ Finally, we performed stress testing to our application using **Apache JMeter**.
 
 The project was deployed using Docker. The necessary scripts (docker-compose.yml file and one Dockerfile for each microservice) are present in this repo.  
 
-As a result whoever clones this repo can just run:  
+The keys and passwords (JWT key, Google OAuth client, Gmail app password, PayPal and Stripe keys) are read from a `.env` file that is not tracked by git. Copy `.env.example` to `.env` in the project's root and fill in the values.  
+
+Then run:  
 ```
 (sudo) docker-compose up
 ```

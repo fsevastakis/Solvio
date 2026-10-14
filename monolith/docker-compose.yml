@@ -5,8 +5,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - PAYPAL_CLIENT_ID=Abm-etelbBB8P8lIP1heUZvy_V4gg1Qzi6emTTY2Nv5_hWy168dVbmDxQd6ge76YcmNobwgL58xvKWlH
-      - PAYPAL_CLIENT_SECRET=EHuiR15AZ8YvD3NJevfdkAe8SLhUzrK707uBVg41Qv2o1yhty_ayUaYrqGkmleSCiTPvFonoLWMXQ5gv
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
 
   backend:
     build: "./backend"
@@ -17,12 +17,13 @@ services:
       - db
     environment:
       - MONGO_DB_URI=mongodb://db/backend
-      - JWT_KEY="arandomjwtkey"
-      - PAYPAL_CLIENT_ID=Abm-etelbBB8P8lIP1heUZvy_V4gg1Qzi6emTTY2Nv5_hWy168dVbmDxQd6ge76YcmNobwgL58xvKWlH
-      - PAYPAL_CLIENT_SECRET=EHuiR15AZ8YvD3NJevfdkAe8SLhUzrK707uBVg41Qv2o1yhty_ayUaYrqGkmleSCiTPvFonoLWMXQ5gv
-      - CLIENT_ID=1089589254674-d22lmgcff5fm2iivoiuiumilvub9t1ep.apps.googleusercontent.com
-      - CLIENT_SECRET=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
-      - APP_PWD=jdxbyyngpnvrzluh
+      - JWT_KEY=${JWT_KEY}
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
+      - CLIENT_ID=${CLIENT_ID}
+      - CLIENT_SECRET=${CLIENT_SECRET}
+      - APP_PWD=${APP_PWD}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
 
   solver:
     build: "./solver"

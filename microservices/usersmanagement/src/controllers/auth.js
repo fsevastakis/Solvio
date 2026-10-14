@@ -4,9 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import Stripe from "stripe";
-const stripe = new Stripe(
-  "sk_test_51PHvOEL9KWQMTSTa0LmM80Oo88aI943X1uaQpLIlcpeXTwrdfVD6GjbiNMwW9VXxquWZXaSUrfHaY0oSijSVd2LG00JZCFCb5u"
-);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // register a new user
 export const registerController = async (req, res) => {

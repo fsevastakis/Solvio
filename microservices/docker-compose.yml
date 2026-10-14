@@ -5,8 +5,8 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - PAYPAL_CLIENT_ID=Abm-etelbBB8P8lIP1heUZvy_V4gg1Qzi6emTTY2Nv5_hWy168dVbmDxQd6ge76YcmNobwgL58xvKWlH
-      - PAYPAL_CLIENT_SECRET=EHuiR15AZ8YvD3NJevfdkAe8SLhUzrK707uBVg41Qv2o1yhty_ayUaYrqGkmleSCiTPvFonoLWMXQ5gv
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
 
   submitproblem:
     build: "./submitproblem"
@@ -19,7 +19,7 @@ services:
       - MONGO_DB_URI=mongodb://db/microservices1
       - RABBITMQ_QUESTIONS_URL=amqp://guest:guest@rabbitmqquestions:5672/
       - EXCHANGE_NAME=questionsExchange
-      - JWT_KEY="arandomjwtkey"
+      - JWT_KEY=${JWT_KEY}
 
   usersmanagement:
     build: "./usersmanagement"
@@ -30,14 +30,15 @@ services:
       - rabbitmqanswers
     environment:
       - MONGO_DB_URI=mongodb://db/users
-      - JWT_KEY="arandomjwtkey"
-      - CLIENT_ID=1089589254674-d22lmgcff5fm2iivoiuiumilvub9t1ep.apps.googleusercontent.com
-      - CLIENT_SECRET=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
+      - JWT_KEY=${JWT_KEY}
+      - CLIENT_ID=${CLIENT_ID}
+      - CLIENT_SECRET=${CLIENT_SECRET}
       - EXCHANGE_NAME_ANSWERS=answersExchange
       - QUEUE_NAME_USERS_MANAGEMENT=UsersManagementQueue
       - RABBITMQ_ANSWERS_URL=amqp://guest:guest@rabbitmqanswers:5672/
-      - PAYPAL_CLIENT_ID=Abm-etelbBB8P8lIP1heUZvy_V4gg1Qzi6emTTY2Nv5_hWy168dVbmDxQd6ge76YcmNobwgL58xvKWlH
-      - PAYPAL_CLIENT_SECRET=EHuiR15AZ8YvD3NJevfdkAe8SLhUzrK707uBVg41Qv2o1yhty_ayUaYrqGkmleSCiTPvFonoLWMXQ5gv
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
 
   showsubmissions:
     build: "./showsubmissions"
@@ -54,7 +55,7 @@ services:
       - RABBITMQ_ANSWERS_URL=amqp://guest:guest@rabbitmqanswers:5672/
       - EXCHANGE_NAME_ANSWERS=answersExchange
       - QUEUE_VIEW_RESULTS=viewResultsQueue2
-      - JWT_KEY="arandomjwtkey"
+      - JWT_KEY=${JWT_KEY}
 
   solversproxy:
     build: "./solversproxy"
@@ -89,7 +90,7 @@ services:
       - EXCHANGE_NAME_ANSWERS=answersExchange
       - QUEUE_NAME_EMAIL_SERVICE=EmailServiceQueue
       - RABBITMQ_ANSWERS_URL=amqp://guest:guest@rabbitmqanswers:5672/
-      - APP_PWD=jdxbyyngpnvrzluh
+      - APP_PWD=${APP_PWD}
 
   showresults:
     build: "./showresults"
@@ -103,7 +104,7 @@ services:
       - RABBITMQ_ANSWERS_URL=amqp://guest:guest@rabbitmqanswers:5672/
       - EXCHANGE_NAME_ANSWERS=answersExchange
       - QUEUE_VIEW_RESULTS=viewResultsQueue
-      - JWT_KEY="arandomjwtkey"
+      - JWT_KEY=${JWT_KEY}
 
   viewstatistics:
     build: "./viewstatistics"
