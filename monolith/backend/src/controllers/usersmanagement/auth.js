@@ -130,6 +130,7 @@ export const getCreditsController = async (req, res) => {
 };
 
 // buy credits with Stripe
+// (earlier payment flow - the frontend now buys credits with PayPal, see payments.js)
 export const buyCreditsController = async (req, res) => {
     try {
         const lineItem = [

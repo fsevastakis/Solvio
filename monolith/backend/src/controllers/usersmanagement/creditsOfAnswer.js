@@ -2,7 +2,8 @@ import Users from "../../models/Users.js";
 import { updateAllowResultsOnProblem } from "../showsubmissions/updateAllowResults.js"
 import { updateAllowResultsOnAnswer } from "../showresults/updateAllowResults.js";
 
-// consume an answer from the broker of answers
+// charge the user for a new answer
+// (called directly by the solver queue in consumeProblem.js after an answer is stored)
 export async function creditsOfAnswer(userID, answer) {
     try {
         // find the user related to the produced answer

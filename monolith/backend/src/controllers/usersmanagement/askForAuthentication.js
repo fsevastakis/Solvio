@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import Answer from "../../models/Answers.js";
 import mongoose from "mongoose";
 import { authenticationController, usersPermissionsController, adminsPermissionsController, getRoleController, editPermissionsController, deletePermissionsController } from "./auth.js";
-// The functions below make calls to usersmanagement microservice so as to
+// The middlewares below call the permission checks of auth.js directly
+// (in the microservices version they were HTTP calls to usersmanagement) so as to
 // ensure that a user has enough permissions to make a request
 // If not enough permissions available, an appropriate status code is returned
 

@@ -1,4 +1,5 @@
-// submit a new problem and push it to the queue
+// submit a new problem (the frontend sends it with status "ready";
+// it is queued only when the user presses Run - see runProblem.js)
 import Problems from "../../models/Problems.js";
 
 export const submitController = async (req, res) => {

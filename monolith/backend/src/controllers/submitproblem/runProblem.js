@@ -1,8 +1,8 @@
 import Problems from "../../models/Problems.js";
 import { consumeProblem } from "../solversproxy/consumeProblem.js";
 
-// update the status of a problem to "running" and push the problem to the queue
-// (so that solversproxy forwards the problem to the solver for execution)
+// update the status of a problem to "running" and push its id to the in-memory queue
+// (consumeProblem in solversproxy/ forwards the problem to the solver for execution)
 export const runProblemController = async (req, res) => {
     try {
         let problem = await Problems.findOne({ _id: req.body.problemID });

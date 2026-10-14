@@ -7,7 +7,7 @@ const base = "https://api-m.sandbox.paypal.com";
 import fetch from "node-fetch";
 import "dotenv/config";
 
-// The code above is taken from the PayPal's documentation
+// The code below is taken from the PayPal's documentation
 // Only some adaptation were needed
 
 /**

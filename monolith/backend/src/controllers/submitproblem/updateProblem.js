@@ -1,6 +1,6 @@
 import Problems from "../../models/Problems.js";
 
-// update a submitted problem and push the updated problem to the queue
+// update a submitted problem (only the database is updated - nothing is queued)
 export const updateSubmission = async (req, res) => {
     try {
         let problemToUpdate = await Problems.findOne({ _id: req.body.problemId });

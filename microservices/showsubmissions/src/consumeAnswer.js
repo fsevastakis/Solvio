@@ -10,11 +10,12 @@ export async function consume_from_answers_queue() {
       // Create a channel
       const channel = await connection.createChannel();
       
-      // Create the direct exchange
+      // Create the fanout exchange of answers
       const exchangeName = process.env.EXCHANGE_NAME_ANSWERS;
       await channel.assertExchange(exchangeName, 'fanout', { durable: true });
       
-      // Create the chart_A queue
+      // Create the showsubmissions answers queue and bind it to the exchange
+      // (no binding key is necessary - fanout exchange)
       const queueName = process.env.QUEUE_VIEW_RESULTS;
       const assertQueue = await channel.assertQueue(queueName, { durable: true });
       

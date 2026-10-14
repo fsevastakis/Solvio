@@ -67,8 +67,8 @@ export const hasAdminsPermissions = async (req, res, next) => {
 export const hasPermissionsToDelete = async (req, res, next) => {
   try {
     console.log("REQUEST FOR HAS PERMISSIONS TO DELETE", req);
-    // checks if a this user has permissions to edit this problem
-    // i.e. he is the creator of this problem
+    // checks if this user has permissions to delete this problem
+    // i.e. the user is the creator of this problem or an admin
     const resp = await axios.post(
       "http://usersmanagement:5000/auth/deletePermissions",
       {
